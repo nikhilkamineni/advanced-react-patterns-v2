@@ -67,13 +67,13 @@ class Toggle extends React.Component {
     </ToggleContext.Consumer>
   )
 
-  state = {on: false}
-
   toggle = () =>
     this.setState(
       ({on}) => ({on: !on}),
       () => this.props.onToggle(this.state.on),
     )
+
+  state = {on: false, toggle: this.toggle}
 
   render() {
     // Because this.props.children is _immediate_ children only, we need
@@ -84,7 +84,7 @@ class Toggle extends React.Component {
 
     return (
       <ToggleContext.Provider
-        value={{on: this.state.on, toggle: this.toggle}}
+        value={this.state}
       >
         {this.props.children}
       </ToggleContext.Provider>
